@@ -14,6 +14,7 @@ resource "aws_subnet" "public_subnet_1" {
   tags = {
     Name = "public_subnet_1"
   }
+  map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "public_subnet_2" {
@@ -23,6 +24,8 @@ resource "aws_subnet" "public_subnet_2" {
   tags = {
     Name = "public_subnet_2"
   }
+  map_public_ip_on_launch = true
+  
 }
 
 resource "aws_internet_gateway" "eks_igw" {

@@ -9,7 +9,7 @@ resource "aws_eks_node_group" "eks_node_group" {
   scaling_config {
     desired_size = 2
     max_size = 2
-    min_size = 2
+    min_size = 1
   }
   tags = {
     Name = "eks_node_group"
@@ -40,4 +40,8 @@ resource "aws_iam_role_policy_attachment" "eks_node_group" {
 resource "aws_iam_role_policy_attachment" "eks_cni_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   role = aws_iam_role.eks_node_group.name
+}
+resource "aws_iam_role_policy_attachment" "eks_container_registry" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.eks_node_group.name
 }
